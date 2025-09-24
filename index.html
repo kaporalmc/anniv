@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎉 Joyeux Anniversaire ❤️</title>
+  <meta name="description" content="Une petite surprise rien que pour toi ✨" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Joyeux Anniversaire ❤️" />
+  <meta property="og:description" content="Une petite surprise rien que pour toi ✨" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg: #0f0f14; --card:#151520; --txt:#f7f7fb; --muted:#b7b7c6; --accent:#ff4d6d; --accent2:#6df0ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--txt); background: radial-gradient(1000px 600px at 100% -10%, #1b1b28, transparent 60%),
+                radial-gradient(800px 500px at -10% 110%, #191926, transparent 60%), var(--bg);
+      display:flex; align-items:center; justify-content:center; padding:28px;
+    }
+    .wrap{width:100%; max-width:900px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08); border-radius:24px; overflow:hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+    }
+    header{padding:22px 22px 12px 22px}
+    h1{margin:0; font-size:clamp(24px, 3vw, 36px); letter-spacing:0.3px}
+    p.sub{margin:6px 0 0 0; color:var(--muted)}
+    .media{position:relative; background:#000}
+    video{width:100%; height:auto; display:block; max-height:70vh;}
+    .unmuteHint{
+      position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,0.45); color:#fff;
+      padding:8px 10px; border-radius:12px; font-size:13px; backdrop-filter: blur(3px);
+    }
+    .actions{display:flex; gap:12px; padding:16px 22px 24px 22px; flex-wrap:wrap}
+    .btn{appearance:none; border:none; cursor:pointer; font-weight:600; letter-spacing:.2px;
+         padding:14px 18px; border-radius:14px; transition:.2s transform, .2s box-shadow, .2s background;
+    }
+    .btn-primary{background: linear-gradient(135deg, var(--accent), #ff6b8a); color:#fff;}
+    .btn-primary:hover{transform: translateY(-1px); box-shadow:0 10px 20px rgba(255,77,109,.3)}
+    .btn-secondary{background:rgba(255,255,255,.06); color:var(--txt); border:1px solid rgba(255,255,255,0.1)}
+    footer{color:var(--muted); font-size:12px; text-align:center; padding:12px;}
+
+    /* Floating hearts */
+    .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden}
+    .heart{position:absolute; width:14px; height:14px; background:var(--accent); transform:rotate(45deg);
+      animation: float 9s linear infinite; opacity:.18}
+    .heart::before,.heart::after{content:""; position:absolute; width:14px; height:14px; background:var(--accent); border-radius:50%}
+    .heart::before{left:-7px}
+    .heart::after{top:-7px}
+    @keyframes float{from{transform:translateY(110vh) rotate(45deg)} to{transform:translateY(-20vh) rotate(45deg)}}
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Pour toi ❤️</h1>
+        <p class="sub">Scanne, regarde, et appuie sur “Suivant” pour la suite de la surprise…</p>
+      </header>
+
+      <div class="media">
+        <!-- Remplace "video_anniv.mp4" par le nom/URL de ta vidéo (MP4) -->
+        <video id="video" playsinline controls preload="auto" poster="poster.jpg">
+          <source src="video_anniv.mp4" type="video/mp4" />
+          Ton navigateur ne prend pas en charge la lecture vidéo.
+        </video>
+        <div class="unmuteHint" id="hint">🔊 Astuce: active le son si besoin</div>
+      </div>
+
+      <div class="actions">
+        <!-- BOUTON SUIVANT : mets ici l'URL de réservation d'hôtel fournie -->
+        <a id="btnNext" class="btn btn-primary" href="https://exemple.com/reservation-hotel" target="_blank" rel="noopener">Suivant → Réserver notre nuit ✨</a>
+        
+        <!-- Bouton optionnel pour relire la vidéo -->
+        <button class="btn btn-secondary" id="replay">↺ Revoir</button>
+      </div>
+    </div>
+    <footer>Fait avec beaucoup d’amour 💕</footer>
+  </div>
+
+  <script>
+    // Répète la vidéo si on clique sur "Revoir"
+    const v = document.getElementById('video');
+    const replay = document.getElementById('replay');
+    const hint = document.getElementById('hint');
+
+    replay.addEventListener('click', ()=>{ v.currentTime = 0; v.play(); });
+    v.addEventListener('play', ()=> hint.style.display = 'none');
+
+    // Petits coeurs animés en fond
+    const container = document.querySelector('.hearts');
+    for (let i=0;i<20;i++){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      const left = Math.random()*100; // vw
+      const delay = Math.random()*-9; // s
+      const dur = 6 + Math.random()*6; // s
+      const scale = 0.6 + Math.random()*1.2;
+      h.style.left = left+'vw';
+      h.style.animationDuration = dur+'s';
+      h.style.animationDelay = delay+'s';
+      h.style.transform = `translateY(110vh) scale(${scale}) rotate(45deg)`;
+      container.appendChild(h);
+    }
+
+    // Option avancée: si tu ajoutes ?next=https://exemple.com dans l'URL,
+    // le bouton "Suivant" utilisera ce lien automatiquement.
+    const params = new URLSearchParams(location.search);
+    const next = params.get('next');
+    if(next){
+      const btn = document.getElementById('btnNext');
+      btn.href = next;
+    }
+  </script>
+</body>
+</html>

@@ -66,7 +66,7 @@
       </header>
 
       <div class="media">
-        <!-- Remplace "video_anniv.mp4" par le nom/URL de ta vidéo (MP4) -->
+        <!-- Lecture de la vidéo -->
         <video id="video" playsinline controls preload="auto" poster="poster.jpg">
           <source src="https://github.com/kaporalmc/anniv/raw/refs/heads/main/video_anniv.mp4" type="video/mp4" />
           Ton navigateur ne prend pas en charge la lecture vidéo.
